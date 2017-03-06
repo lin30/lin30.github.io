@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+   .image {
+      color: red;
+      background: yellow;
+    }
+  </style>
+  <script src="./html2canvas.js"></script>
+  <script>
+    function takeScreenshot() {
+      var cc = document.getElementById('cc')
+      var width = cc.offsetWidth
+      var height = cc.offsetHeigh
+      html2canvas(cc, {
+        onrendered: function (canvas) {
+          canvas.style.width = 100
+          convertCanvasToImage(canvas)
+        },
+        width: width,
+        height: height
+      });
+    }
+
+    function convertCanvasToImage(canvas) {
+      //新Image对象，可以理解为DOM  
+      var image = new Image();
+      // canvas.toDataURL 返回的是一串Base64编码的URL，当然,浏览器自己肯定支持  
+      // 指定格式 PNG  
+      image.src = canvas.toDataURL("image/png");
+      document.getElementById('image').appendChild(image)
+      console.log(image)
+    }
+  </script>
+</head>
+
+<body>
+  <div id="cc">
+    <div class="image" style="word-break: break-all">春眠不觉晓处处闻啼鸟夜来风雨声花落知多少  春眠不觉晓处处闻啼鸟夜来风雨声花落知多少</div>
+    <div class="image" style="word-break: break-all">春眠不觉晓处处闻啼鸟夜来风雨声花落知多少  春眠不觉晓处处闻啼鸟夜来风雨声花落知多少</div>
+    <div class="image" style="word-break: break-all">春眠不觉晓处处闻啼鸟夜来风雨声花落知多少  春眠不觉晓处处闻啼鸟夜来风雨声花落知多少</div>
+    <div class="image" style="word-break: break-all">春眠不觉晓处处闻啼鸟夜来风雨声花落知多少  春眠不觉晓处处闻啼鸟夜来风雨声花落知多少</div>
+    <button onclick="takeScreenshot()">按钮按钮</button>
+    <div id="image"></div>
+    <div>北京北京</div>
+  </div>
+
+</body>
+
+</html>
